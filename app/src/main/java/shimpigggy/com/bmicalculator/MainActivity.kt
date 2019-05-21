@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        loadData()
+
         main_btn_result.setOnClickListener {
             //다음 activity로 넘어감
             /*val intent = Intent(this, ResultActivity::class.java)
@@ -19,11 +21,36 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("height", main_edit_height.text.toString())
             startActivity(intent)*/
 
+            SharedPreferenceUtil.saveDate(
+                this,
+                main_edit_weight.text.toString().toInt(),
+                main_edit_height.text.toString().toInt()
+            )
+
             //anko 라이브러리 적용함
             startActivity<ResultActivity>(
                 "weight" to main_edit_weight.text.toString(),
                 "height" to main_edit_height.text.toString()
             )
+        }
+
+        main_btn_reset.setOnClickListener {
+            SharedPreferenceUtil.removeDataAll(this)
+            main_edit_height.setText("")
+            main_edit_weight.setText("")
+        }
+    }
+
+    private fun loadData(): Unit{
+        val height = SharedPreferenceUtil.loadHeight(this)
+        val weight = SharedPreferenceUtil.loadWeight(this)
+
+        if (height != 0) {
+            main_edit_height.setText(height.toString())
+        }
+
+        if (weight != 0) {
+            main_edit_weight.setText(weight.toString())
         }
     }
 }

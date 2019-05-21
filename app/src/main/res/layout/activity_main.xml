@@ -32,4 +32,13 @@
             android:layout_below="@id/main_edit_weight"
             android:layout_margin="10dp"
             android:layout_alignEnd="@id/main_edit_height"/>
+    
+    <Button
+            android:id="@+id/main_btn_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초기화"
+            android:layout_below="@id/main_edit_weight"
+            android:layout_margin="10dp"
+            android:layout_alignStart="@id/main_edit_weight"/>
 </RelativeLayout>
